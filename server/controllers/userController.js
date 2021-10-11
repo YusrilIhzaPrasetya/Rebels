@@ -36,7 +36,9 @@ class userController {
             }
 
             if(!bcrypt.compareSync(password,user.password)){
-                return next(error)
+                res.status(404).json({
+                    msg : "Email atau password salah"
+                })
             }
 
             const accessToken = JWT.sign({
