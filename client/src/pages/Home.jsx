@@ -1,12 +1,14 @@
-import React from 'react'
+import React from 'react';
+import {BrowserRouter as Router,Link, Switch, Route} from "react-router-dom";
+
 
 export default function Home() {
     return (
         <div>
-            <button>Login</button>
+            <button><Link to="/login">Login</Link></button>
             <br />
             <br />
-            <button>Registrasi</button>
+            <button><Link to="/register">Registrasi</Link></button>
         </div>
     )
 }
