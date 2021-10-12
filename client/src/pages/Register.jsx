@@ -27,20 +27,13 @@ function Register() {
     }
  
     return (
-        <div>
-            <form id="myform" action="registerUser" onSubmit={registerUser}>
-                {/* Untuk input nama */}
-                <p>Input Nama</p>
-                <input type="text" name="nama" className="border-black border-2"/>
-                {/* Untuk input email */}
-                <p>Input Email</p>
-                <input type="text" name="email" className="border-black border-2"/>
-                {/* Untuk input password */}
-                <p>Input Password</p>
-                <input type="password" name="password" className="border-black border-2"/>
-                <button type="submit" value="Submit Form" >Daftar</button>
-                
-                <button><Link to="/">Back</Link></button>
+        <div className="flex justify-center items-center fixed w-screen h-screen">
+            <form id="myform" action="registerUser" onSubmit={registerUser} className="flex flex-col items-center">
+                <input type="text" placeholder="Masukan nama ..." name="nama" className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
+                <input type="text" placeholder="Masukan email ..." name="email" className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
+                <input type="password" placeholder="Masukan password ..." name="password" className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
+                <button type="submit" value="Submit Form" className="border-transparent bg-green-500 text-white w-28 text-l p-3 rounded-lg mt-3" >Daftar</button>
+                <Link to="/login"><button className="text-sm mt-6 h-2">Sudah Punya Akun?</button></Link>
             </form>
         </div>
     )
