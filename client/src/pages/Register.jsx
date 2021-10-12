@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router,Link, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router,Link} from "react-router-dom";
 
 function Register() {
     // const form = document.getElementById('form-register')
@@ -11,11 +11,7 @@ function Register() {
         let email = event.target.email.value;
         let password = event.target.password.value;
 
-        const data = {
-            nama,
-            email,
-            password
-        }
+        
         const result =  fetch(`http://localhost:4000/users/register`,{
             method: `POST`, 
             headers: { 

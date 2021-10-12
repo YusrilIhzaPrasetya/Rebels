@@ -7,10 +7,6 @@ function Login() {
         let email = event.target.email.value;
         let password = event.target.password.value;
 
-        const data = {
-            email,
-            password
-        }
         const result =  fetch(`http://localhost:4000/users/login`,{
             method: `POST`, 
             headers: { 
