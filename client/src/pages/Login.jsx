@@ -22,15 +22,13 @@ function Login() {
 
 
     return (
-        <div>
-            <form action="loginUser" onSubmit={loginUser}>
-                {/* Untuk input email */}
-                <p>Input Email</p>
-                <input type="email" name="email" className="border-black border-2"/>
-                {/* Untuk input password */}
-                <p>Input Password</p>
-                <input type="password" name="password"  className="border-black border-2"/>
-                <button>Masuk</button>
+        <div className="flex justify-center items-center fixed w-screen h-screen">
+            <form action="loginUser" onSubmit={loginUser} className="flex flex-col items-center">
+                <input type="email" placeholder="Masukan Email . . ." name="email" className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
+                <input type="password" name="password" placeholder="Masukan Password . . ." className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
+                <button className="border-transparent bg-green-500 text-white w-28 text-l p-3 rounded-lg mt-6">
+                    Masuk
+                </button>
             </form>
         </div>
     )

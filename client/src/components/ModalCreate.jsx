@@ -12,12 +12,12 @@ function modalCreate({closeModal}) {
                 <form action="" className="flex flex-col">
                     <input type="text" placeholder="Topic" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg my-2"/>
                     <input type="text" placeholder="Nominal" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
-                    <div>
-                        <input type="datetime-local" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
-                        <input type="file" className="mb-4 mt-2"/>
-                    </div>
-                    <textarea placeholder="Keterangan" className="bg-black bg-opacity-10 border-none drop-shadow-xl h-32 p-2 rounded-lg mb-2"></textarea>
-                    <p className="text-sm my-2 text-gray-500">Catat sebagai</p>
+                        <div>
+                            <input type="datetime-local" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
+                            <input type="file" className="mb-4 mt-2"/>
+                        </div>
+                            <textarea placeholder="Keterangan" className="bg-black bg-opacity-10 border-none drop-shadow-xl h-32 p-2 rounded-lg mb-2"></textarea>
+                            <p className="text-sm my-2 text-gray-500">Catat sebagai</p>
                     <div>
                         <button className="border-black border-2 py-2 px-6 mr-5 rounded-lg border-transparent bg-green-500 text-white">Pemasukan</button>
                         <button className="border-black border-2 py-2 px-6 rounded-lg border-transparent bg-red-500 text-white">Pengeluaran</button>
