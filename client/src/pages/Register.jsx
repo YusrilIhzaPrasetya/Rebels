@@ -6,16 +6,18 @@ function Register() {
     // form.addEventListener('submit',registerUser)
 
     const registerUser =(event)=>{
+        
         event.preventDefault()
         let nama = event.target.nama.value;
         let email = event.target.email.value;
         let password = event.target.password.value;
-
+        
         
         const result =  fetch(`http://localhost:4000/users/register`,{
             method: `POST`, 
             headers: { 
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                accestoken:""
             },
             body: JSON.stringify({
                 nama,
