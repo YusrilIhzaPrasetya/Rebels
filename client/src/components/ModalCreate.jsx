@@ -1,32 +1,52 @@
+import axios from '../axios';
 import React from 'react'
 
 function modalCreate({closeModal}) {
 
-    const tambahData =(event)=>{
+    const tambahData =async(event)=>{
 
         event.preventDefault()
         let topik = event.target.topik.value;
         let nominal = event.target.nominal.value;
         let tanggal = event.target.tanggal.value;
         let foto = event.target.foto.value;
+        let keterangan = event.target.keterangan.value;
         let tipedata = "pemasukan";
 
-    const data = {
-        topik,
-        nominal,
-        tanggal,
-        foto,
-        tipedata,
-    }
-console.log(data)
-        const result =  fetch(`http://localhost:4000/datatable`,{
-            method: `POST`, 
-            headers: { 
-                'Content-Type': 'application/json',
+        console.log(tanggal)
 
-            },
-            body: JSON.stringify(data)
-        } ).then((res) => res.json())
+    const data = {
+        topik : topik,
+        nominal : nominal,
+        tanggal : tanggal,
+        foto : foto,
+        tipedata : tipedata,
+        keterangan : keterangan
+    }
+
+    console.log(data)
+    const item = localStorage.getItem("token")
+
+    const result = await axios({
+        headers : {
+            token : item
+        },
+        method : "POST",
+        url : "/datatable",
+        data : data
+    })
+
+    console.log(result)
+
+        // const result =  fetch(`http://localhost:4000/datatable`,{
+        //     method: `POST`, 
+        //     headers: { 
+        //         'Content-Type': 'application/json',
+
+        //     },
+        //     body: JSON.stringify(data)
+        // } ).then((res) => res.json()).then(res=>console.log(res))
+        // // console.log(result)
     }
 
     return (
@@ -41,8 +61,8 @@ console.log(data)
                     <input type="text" placeholder="Topic" name="topik" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg my-2"/>
                     <input type="text" placeholder="Nominal" name="nominal" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
                         <div>
-                            <input type="date" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
-                            <input type="file" className="mb-4 mt-2"/>
+                            <input type="date" name="tanggal" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
+                            <input type="file" name="foto" className="mb-4 mt-2"/>
                         </div>
                             <textarea placeholder="Keterangan" name="keterangan" className="bg-black bg-opacity-10 border-none drop-shadow-xl h-32 p-2 rounded-lg mb-2"></textarea>
                             <p className="text-sm my-2 text-gray-500">Catat sebagai</p>

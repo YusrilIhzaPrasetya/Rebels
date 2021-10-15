@@ -1,31 +1,45 @@
 import React from 'react'
 import {BrowserRouter as Router,Link} from "react-router-dom";
+import axios from '../axios';
 
 function Register() {
     // const form = document.getElementById('form-register')
     // form.addEventListener('submit',registerUser)
 
-    const registerUser =(event)=>{
+    const registerUser = async (event)=>{
         
         event.preventDefault()
         let nama = event.target.nama.value;
         let email = event.target.email.value;
         let password = event.target.password.value;
         
-        
-        const result =  fetch(`http://localhost:4000/users/register`,{
-            method: `POST`, 
-            headers: { 
-                'Content-Type': 'application/json',
-                accestoken:""
-            },
-            body: JSON.stringify({
-                nama,
-                email,
-                password
-            })
-        } ).then((res) => res.json())
+        let data = {
+            nama : nama,
+            email : email,
+            password : password
+        }
+
+        const result = await axios({
+            method : "POST",
+            url : "users/register",
+            data : data
+        })
+
         console.log(result)
+
+        // const result =  fetch(`http://localhost:4000/users/register`,{
+        //     method: `POST`, 
+        //     headers: { 
+        //         'Content-Type': 'application/json',
+        //         accestoken:""
+        //     },
+        //     body: JSON.stringify({
+        //         nama,
+        //         email,
+        //         password
+        //     })
+        // } ).then((res) => res.json())
+        // console.log(result)
     }
  
     return (
