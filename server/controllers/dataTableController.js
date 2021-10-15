@@ -26,12 +26,12 @@ const upload = multer({storage:storage})
      }
      static createDataTable = async (req,res,next)=>{
          try {
-             const { topik, nominal, tanggal , foto, keterangan,tipedata} = req.body;
+             const { topik,nominal,tanggal,foto,keterangan,tipedata} = req.body;
              const newDataTable = {
                  topik : topik ,
-                 nominal : nominal , 
+                 nominal : nominal, 
                  tanggal : tanggal, 
-                 foto  : foto , 
+                 foto  : foto, 
                  keterangan : keterangan,
                  tipedata : tipedata
              }
@@ -69,7 +69,6 @@ const upload = multer({storage:storage})
              }
              Object.assign(datatable, req.body);
              await datatable.save()
-
              res.status(200).json({
                  message:"Update Succesfull",
                  datatable
