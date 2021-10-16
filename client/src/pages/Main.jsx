@@ -8,7 +8,7 @@ function Main() {
 
     return (
         <div className="min-h-screen">
-            <div className="flex content-between justify-between mx-32 mt-7">
+            <div className="flex content-between justify-between mx-32 mt-7 mb-16">
                 <div><p>Logo</p></div>
                 <div>
                     <button className="border-transparent text-md font-semibold mx-6">Bantuan</button>
