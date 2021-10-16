@@ -15,7 +15,20 @@ const upload = multer({storage:storage})
  class dataTableController {
      static getAll = async (req,res,next)=>{
          try {
-             const datatable = await dataTableModel.find();
+             const datatable = await dataTableModel.find().sort("-tanggal").transform((data)=>{
+                console.log(data) 
+                return data.map((item)=>{
+                    return {
+                        _id : item._id,
+                        topik: item.topik,
+                        nominal: item.nominal,
+                        tanggal: (item.tanggal)?item.tanggal.toLocaleDateString() : item.tanggal ,
+                        foto: item.foto,
+                        keterangan: item.keterangan,
+                        tipedata: item.tipedata
+                    } 
+                })
+             });
              res.status(200).json({
                  message : "success",
                  datatable

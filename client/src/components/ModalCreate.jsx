@@ -1,7 +1,9 @@
 import axios from '../axios';
-import React from 'react'
+import React,{useState} from 'react'
 
-function modalCreate({closeModal}) {
+function ModalCreate({closeModal, listen, setListen}) {
+
+    const[tipe,setTipe]=useState(null)
 
     const tambahData =async(event)=>{
 
@@ -11,7 +13,7 @@ function modalCreate({closeModal}) {
         let tanggal = event.target.tanggal.value;
         let foto = event.target.foto.value;
         let keterangan = event.target.keterangan.value;
-        let tipedata = "pemasukan";
+        let tipedata = tipe;
 
         console.log(tanggal)
 
@@ -37,6 +39,9 @@ function modalCreate({closeModal}) {
     })
 
     console.log(result)
+
+    setListen(listen+1)
+    closeModal(false)
 
         // const result =  fetch(`http://localhost:4000/datatable`,{
         //     method: `POST`, 
@@ -67,8 +72,8 @@ function modalCreate({closeModal}) {
                             <textarea placeholder="Keterangan" name="keterangan" className="bg-black bg-opacity-10 border-none drop-shadow-xl h-32 p-2 rounded-lg mb-2"></textarea>
                             <p className="text-sm my-2 text-gray-500">Catat sebagai</p>
                     <div>
-                        <button className="py-2 px-6 mr-5 rounded-lg border-transparent bg-green-500 text-white">Pemasukan</button>
-                        <button className="py-2 px-6 rounded-lg border-transparent bg-red-500 text-white">Pengeluaran</button>
+                        <button onClick={()=>setTipe("pemasukan")} className="py-2 px-6 mr-5 rounded-lg border-transparent bg-green-500 text-white">Pemasukan</button>
+                        <button onClick={()=>setTipe("pengeluaran")} className="py-2 px-6 rounded-lg border-transparent bg-red-500 text-white">Pengeluaran</button>
                     </div>
                 </form>
             </div>
@@ -76,4 +81,4 @@ function modalCreate({closeModal}) {
     )
 }
 
-export default modalCreate
+export default ModalCreate
