@@ -35,13 +35,19 @@ const upload = multer({storage:storage})
                  keterangan : keterangan,
                  tipedata : tipedata
              }
+
+             console.log(newDataTable)
+
              const newData = await dataTableModel.create(newDataTable)
              res.status(201).json({
                  message : "New Data has beed added",
                  newData
              })
          } catch (error) {
-             next(error)
+             next({
+                 code : 500,
+                 msg : error.message
+             })
          }
      }
      static getDetail = async (req,res,next)=>{

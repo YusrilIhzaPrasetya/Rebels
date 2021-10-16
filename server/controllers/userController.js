@@ -24,40 +24,7 @@ class userController {
         }
     }
     
-    static login = async(req,res,next)=>{
-        try {
-            const {email,password} = req.body;
-            const user = await userModel.findOne({
-                email : email
-            })
-            
-            if(!user){
-               return next(error);
-            }
-
-            if(!bcrypt.compareSync(password,user.password)){
-                res.status(404).json({
-                    msg : "Email atau password salah"
-                })
-            }
-
-            const accessToken = JWT.sign({
-                id : user._id,
-                nama : user.nama,
-                email : user.email
-            },process.env.JWT_SECRET)
-
-            res.status(200).json({
-                msg:"email ada",
-                token : accessToken
-            })
-
-        } catch (error) {
-            next(error)
-        }
-    }
-
-    //     static login = async(req,res,next)=>{
+    // static login = async(req,res,next)=>{
     //     try {
     //         const {email,password} = req.body;
     //         const user = await userModel.findOne({
@@ -69,8 +36,11 @@ class userController {
     //         }
 
     //         if(!bcrypt.compareSync(password,user.password)){
-    //             return next(error)
+    //             res.status(404).json({
+    //                 msg : "Email atau password salah"
+    //             })
     //         }
+
     //         const accessToken = JWT.sign({
     //             id : user._id,
     //             nama : user.nama,
@@ -86,6 +56,43 @@ class userController {
     //         next(error)
     //     }
     // }
+
+        static login = async(req,res,next)=>{
+        try {
+            const {email,password} = req.body;
+            const user = await userModel.findOne({
+                email : email
+            })
+            
+            if(!user){
+               return next({code : 404, msg :"Not Found"});
+            }
+
+            if(!bcrypt.compareSync(password,user.password)){
+                return next({code : 422, msg :"Invalid Email Password"})
+            }
+
+            if(!bcrypt.compareSync(password,user.password)){
+                return next(error)
+            }
+            const accessToken = JWT.sign({
+                id : user._id,
+                nama : user.nama,
+                email : user.email
+            },process.env.JWT_SECRET)
+
+            res.status(200).json({
+                msg:"email ada",
+                token : accessToken
+            })
+
+        } catch (error) {
+            next({
+                code : 500,
+                msg: error.message
+            })
+        }
+    }
 }
 
 module.exports = userController
