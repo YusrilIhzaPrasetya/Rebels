@@ -38,7 +38,7 @@ console.log(data)
     useEffect(()=>{
         axios.get("http://localhost:4000/datatable", {headers : {
             token : item
-        }}).then(res=>console.log(res.data.datatable))
+        }}).then(res=>setData(res.data.datatable))
     },[])
 
     return (
