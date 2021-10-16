@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const authentication = async (req,res,next) => {
     try{
     const {token} = req.headers;
+    
     if (!token) {
         next({code: 400, message: "access token required"});
     }

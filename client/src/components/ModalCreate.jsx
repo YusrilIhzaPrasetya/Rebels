@@ -11,13 +11,13 @@ function modalCreate({closeModal}) {
         let foto = event.target.foto.value;
         let tipedata = "pemasukan";
 
-    const data = {
-        topik,
-        nominal,
-        tanggal,
-        foto,
-        tipedata,
-    }
+const data = {
+    topik,
+    nominal,
+    tanggal,
+    foto,
+    tipedata,
+}
 console.log(data)
         const result =  fetch(`http://localhost:4000/datatable`,{
             method: `POST`, 
@@ -27,6 +27,7 @@ console.log(data)
             },
             body: JSON.stringify(data)
         } ).then((res) => res.json())
+        console.log(result)
     }
 
     return (

@@ -57,36 +57,35 @@ class userController {
         }
     }
 
-        static login = async(req,res,next)=>{
-        try {
-            const {email,password} = req.body;
-            const user = await userModel.findOne({
-                email : email
-            })
+    //     static login = async(req,res,next)=>{
+    //     try {
+    //         const {email,password} = req.body;
+    //         const user = await userModel.findOne({
+    //             email : email
+    //         })
             
-            if(!user){
-               return next(error);
-            }
+    //         if(!user){
+    //            return next(error);
+    //         }
 
-            if(!bcrypt.compareSync(password,user.password)){
-                return next(error)
-            }
+    //         if(!bcrypt.compareSync(password,user.password)){
+    //             return next(error)
+    //         }
+    //         const accessToken = JWT.sign({
+    //             id : user._id,
+    //             nama : user.nama,
+    //             email : user.email
+    //         },process.env.JWT_SECRET)
 
-            const accessToken = JWT.sign({
-                id : user._id,
-                nama : user.nama,
-                email : user.email
-            },process.env.JWT_SECRET)
+    //         res.status(200).json({
+    //             msg:"email ada",
+    //             token : accessToken
+    //         })
 
-            res.status(200).json({
-                msg:"email ada",
-                token : accessToken
-            })
-
-        } catch (error) {
-            next(error)
-        }
-    }
+    //     } catch (error) {
+    //         next(error)
+    //     }
+    // }
 }
 
 module.exports = userController

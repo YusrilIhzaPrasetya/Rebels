@@ -1,24 +1,30 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 function Login() {
 
-    const loginUser =(event)=>{
-        
+    const loginUser = async (event)=>{
         event.preventDefault()
         let email = event.target.email.value;
         let password = event.target.password.value;
+       
+        try {
+            const result = await fetch(`http://localhost:4000/users/login`,{
+                    method: `POST`, 
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                } )
+                const response = await result.json()
+                console.log(response)
 
-        const result =  fetch(`http://localhost:4000/users/login`,{
-            method: `POST`, 
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        } ).then((res) => res.json())
-        console.log(result)
+        } catch (error) {
+            return null
+        }
+        
     }
 
 
