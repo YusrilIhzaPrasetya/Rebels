@@ -36,7 +36,7 @@ function modalCreate({closeModal}) {
         data : data
     })
 
-    console.log(result)
+    console.log(data)
 
         // const result =  fetch(`http://localhost:4000/datatable`,{
         //     method: `POST`, 
