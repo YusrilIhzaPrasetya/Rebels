@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import ModalUpdate from './ModalUpdate'
 import axios from '../axios'
 
-function DashboardCard() {
+function DashboardCard({listen}) {
 
     const [data, setData] = useState([])
 
@@ -39,14 +39,14 @@ console.log(data)
         axios.get("http://localhost:4000/datatable", {headers : {
             token : item
         }}).then(res=>setData(res.data.datatable))
-    },[])
+    },[listen])
 
     return (
 
     <div>
         {data.map((elemement,index)=>{
             return(
-                <div className="pt-3 flex mx-32">
+                <div className="pt-3 flex mx-32" key={elemement._id}>
                     <div className="flex flex-row mr-8 justify-between w-screen py-3 px-8 rounded-lg bg-gray-400 cursor-pointer" onClick={()=>{
                         setOpenModal(true)
                     }}>

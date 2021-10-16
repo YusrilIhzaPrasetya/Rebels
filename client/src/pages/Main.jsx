@@ -4,6 +4,7 @@ import ModalCreate from '../components/ModalCreate'
 
 function Main() {
 
+    const [listen, setListen] = useState(0)
     const [openModal, setOpenModal] = useState(false)
 
     return (
@@ -15,11 +16,11 @@ function Main() {
                     <button className="border-transparent bg-green-500 text-white text-sm p-3 rounded-lg" onClick={()=>{
                         setOpenModal(true)
                     }}>Tambah Aktifitas</button>
-                    {openModal && <ModalCreate closeModal={setOpenModal} />}
+                    {openModal && <ModalCreate closeModal={setOpenModal} listen={listen} setListen={setListen} />}
                 </div>
             </div>
             <div>
-                <DashboardCard />
+                <DashboardCard listen={listen} />
             </div>
         </div>
     )
