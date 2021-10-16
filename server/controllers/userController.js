@@ -65,11 +65,11 @@ class userController {
             })
             
             if(!user){
-               return next(error);
+               return next({code : 404, msg :"Not Found"});
             }
 
             if(!bcrypt.compareSync(password,user.password)){
-                return next(error)
+                return next({code : 422, msg :"Invalid Email Password"})
             }
 
             const accessToken = JWT.sign({
@@ -84,7 +84,10 @@ class userController {
             })
 
         } catch (error) {
-            next(error)
+            next({
+                code : 500,
+                msg: error.message
+            })
         }
     }
 }

@@ -1,24 +1,44 @@
 import React from 'react'
+import {useHistory} from "react-router-dom"
+import axios from "../axios"
 
 function Login() {
 
-    const loginUser =(event)=>{
+    let history = useHistory()
+
+    const loginUser = async (event)=>{
         
         event.preventDefault()
         let email = event.target.email.value;
         let password = event.target.password.value;
 
-        const result =  fetch(`http://localhost:4000/users/login`,{
-            method: `POST`, 
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        } ).then((res) => res.json())
+        let data = {
+            email : email,
+            password : password
+        }
+
+        const result = await axios({
+            method : "POST",
+            url : "users/login",
+            data : data
+        })
+
         console.log(result)
+        history.push("/main")
+        localStorage.setItem("token",result.data.token)
+
+        // const result =  fetch(`http://localhost:4000/users/login`,{
+        //     method: `POST`, 
+        //     headers: { 
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         email,
+        //         password
+        //     })
+        // } ).then((res) => res.json()).then(res=>console.log(res))
+        // console.log(result)
+        // history.push("/main")
     }
 
 
