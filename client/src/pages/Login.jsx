@@ -2,9 +2,13 @@ import React from 'react'
 import {useHistory} from "react-router-dom"
 import axios from "../axios"
 import {BrowserRouter as Link} from "react-router-dom"; 
+import { useDispatch, useSelector } from "react-redux";
+
 function Login() {
 
     let history = useHistory()
+    const logAs = useSelector(state => state.logAs)
+    const dispatch = useDispatch()
 
     const loginUser = async (event)=>{
         
@@ -17,28 +21,33 @@ function Login() {
             password : password
         }
 
-        const result = await axios({
+        const login = await axios({
             method : "POST",
             url : "users/login",
             data : data
         })
 
-        console.log(result)
+        // console.log(login)
         history.push("/main")
-        localStorage.setItem("token",result.data.token)
+        localStorage.setItem("token",login.data.token)
 
-        // const result =  fetch(`http://localhost:4000/users/login`,{
-        //     method: `POST`, 
-        //     headers: { 
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         email,
-        //         password
-        //     })
-        // } ).then((res) => res.json()).then(res=>console.log(res))
-        // console.log(result)
-        // history.push("/main")
+        console.log(localStorage)
+        await dispatch({
+            type : "Authing",
+            payload : { 
+                authAS : login.data.data
+            }
+        })
+        localStorage.setItem('authAs' , login.data.data)
+        // console.log(login.data.data)
+
+        await dispatch({
+            type:" Login",
+            payload : {
+                logAs : login.data.data
+            }
+        })
+       
     }
 
 

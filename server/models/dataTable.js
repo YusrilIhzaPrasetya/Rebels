@@ -10,7 +10,7 @@ const dataTableSchema = mongoose.Schema({
         required : true
     },
     tanggal : {
-        type : String,
+        type : Date,
         required : true
     },
     foto : {
