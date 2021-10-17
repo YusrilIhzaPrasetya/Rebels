@@ -5,38 +5,11 @@ import axios from '../axios'
 function DashboardCard({listen}) {
 
     const [data, setData] = useState([])
-
     const [openModal, setOpenModal] = useState(false)
-    const tambahData =(event)=>{
-
-        event.preventDefault()
-        let topik = event.target.topik.value;
-        let nominal = event.target.nominal.value;
-        let tanggal = event.target.tanggal.value;
-        let foto = event.target.foto.value;
-        let tipedata = "pemasukan";
-
-    const data = {
-        topik,
-        nominal,
-        tanggal,
-        foto,
-        tipedata,
-    }
-console.log(data)
-        const result =  fetch(`http://localhost:4000/datatable`,{
-            method: `POST`, 
-            headers: { 
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        } ).then((res) => res.json())
-    }
-
     const item = localStorage.getItem("token")
-
+console.log(item)
     useEffect(()=>{
-        axios.get("http://localhost:4000/datatable", {headers : {
+        axios.get("http://localhost:4000/datatable",{headers : {
             token : item
         }}).then(res=>setData(res.data.datatable))
     },[listen])

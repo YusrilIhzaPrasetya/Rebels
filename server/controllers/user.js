@@ -2,6 +2,8 @@ const users = require("../models/user");
 
 class Users {
     static async readAll(req, res, next) {
+
+      const currentUser = req.currentUser;
       let usersAll = await users.find();
       if (!usersAll.length) {
         next({
@@ -12,7 +14,8 @@ class Users {
         usersAll = usersAll.filter(item => !item.is_deleted);
         res.status(200).json({
           message: "success getting all user",
-          usersAll
+          usersAll,
+          currentUser : currentUser
         });
       }
     }

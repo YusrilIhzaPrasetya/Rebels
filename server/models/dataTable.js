@@ -24,7 +24,10 @@ const dataTableSchema = mongoose.Schema({
     tipedata : {
         type : String,
         required : true
-    },
+    },userId: {
+        type : String,
+        require: true
+    }
 },{
     versionKey: false ,
     collection:"dataTable"

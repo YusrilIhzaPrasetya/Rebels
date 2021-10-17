@@ -22,8 +22,8 @@ function ModalCreate({closeModal, listen, setListen}) {
         nominal : nominal,
         tanggal : tanggal,
         foto : foto,
+        keterangan : keterangan,
         tipedata : tipedata,
-        keterangan : keterangan
     }
 
     console.log(data)
@@ -34,11 +34,11 @@ function ModalCreate({closeModal, listen, setListen}) {
             token : item
         },
         method : "POST",
-        url : "/datatable",
+        url : "http://localhost:4000/datatable",
         data : data
     })
-
     console.log(result)
+    // console.log(data)
 
     setListen(listen+1)
     closeModal(false)
