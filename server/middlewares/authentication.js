@@ -10,7 +10,6 @@ const authentication = async (req,res,next) => {
     }
 
     const jwtPayload = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(jwtPayload);
 
     const user = await users.findOne({
         where :{
@@ -21,10 +20,8 @@ const authentication = async (req,res,next) => {
     if (!users) {
     next({ code: 401, message: "invalid access token!" });
     }
-    req.currentUser = {
-        ...user.dataValues, 
-        // role :'admin'
-    }
+    req.currentUser = user;
+
     next()
         }catch(error){
             next(error)

@@ -1,11 +1,12 @@
 import React from 'react'
-import {BrowserRouter as Router,Link} from "react-router-dom";
+import {BrowserRouter as Link} from "react-router-dom";
+import {useHistory} from "react-router-dom"
 import axios from '../axios';
 
 function Register() {
     // const form = document.getElementById('form-register')
     // form.addEventListener('submit',registerUser)
-
+    let history = useHistory()
     const registerUser = async (event)=>{
         
         event.preventDefault()
@@ -24,7 +25,7 @@ function Register() {
             url : "users/register",
             data : data
         })
-
+        history.push("/login")
         console.log(result)
 
         // const result =  fetch(`http://localhost:4000/users/register`,{

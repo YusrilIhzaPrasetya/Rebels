@@ -5,7 +5,7 @@ const authentication = require("../middlewares/authentication");
 
 router.post("/users/register",userController.registrasi)
 router.post("/users/login",userController.login)
-router.get("/users",user.readAll);
+router.get("/users",authentication,user.readAll);
 router.get("/users/:id",authentication,user.readById);
 router.patch("/users/:id",authentication,user.updateUser);
 router.delete("/users/:id",authentication,user.destroyUser);

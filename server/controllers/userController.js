@@ -93,6 +93,20 @@ class userController {
             })
         }
     }
+
+    static logout = async(req,res,next)=>{
+        try {
+            res.clearCookie("jwt")
+            res.status(200).json({
+                msg:"Logout Success"
+            })
+        } catch (error) {
+            next({
+                code : 500,
+                msg: error.message
+            })
+        }
+    }
 }
 
 module.exports = userController

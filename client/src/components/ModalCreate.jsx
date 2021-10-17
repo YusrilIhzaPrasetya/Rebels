@@ -20,8 +20,8 @@ function modalCreate({closeModal}) {
         nominal : nominal,
         tanggal : tanggal,
         foto : foto,
+        keterangan : keterangan,
         tipedata : tipedata,
-        keterangan : keterangan
     }
 
     console.log(data)
@@ -32,11 +32,11 @@ function modalCreate({closeModal}) {
             token : item
         },
         method : "POST",
-        url : "/datatable",
+        url : "http://localhost:4000/datatable",
         data : data
     })
-
-    console.log(data)
+    console.log(result)
+    // console.log(data)
 
         // const result =  fetch(`http://localhost:4000/datatable`,{
         //     method: `POST`, 

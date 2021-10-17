@@ -1,7 +1,7 @@
 import React from 'react'
 import {useHistory} from "react-router-dom"
 import axios from "../axios"
-
+import {BrowserRouter as Link} from "react-router-dom"; 
 function Login() {
 
     let history = useHistory()
@@ -43,7 +43,8 @@ function Login() {
 
 
     return (
-        <div className="flex justify-center items-center fixed w-screen h-screen">
+        <div className="flex flex-col justify-center  items-center fixed w-screen h-screen">
+            <div>
             <form action="loginUser" onSubmit={loginUser} className="flex flex-col items-center">
                 <input type="email" placeholder="Masukan Email . . ." name="email" className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
                 <input type="password" name="password" placeholder="Masukan Password . . ." className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
@@ -51,6 +52,13 @@ function Login() {
                     Masuk
                 </button>
             </form>
+            </div>
+            <div className='pt-5'>
+            <Link to="/register">
+            <button className="border-transparent bg-green-500 text-white w-28 text-sm p-3 rounded-lg">Registrasi</button>
+            </Link>
+            </div>
+            
         </div>
     )
 }

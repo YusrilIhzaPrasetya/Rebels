@@ -13,29 +13,35 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage})  
 
  class dataTableController {
+
      static getAll = async (req,res,next)=>{
          try {
-             const datatable = await dataTableModel.find();
+            const currentUser = req.currentUser
+            // console.log(currentUser._id)
+             const datatable = await dataTableModel.findOne({userId: currentUser._id});
              res.status(200).json({
                  message : "success",
-                 datatable
+                 datatable,
              })
          } catch (error) {
              next(error)
          }
      }
+
      static createDataTable = async (req,res,next)=>{
          try {
              const { topik,nominal,tanggal,foto,keterangan,tipedata} = req.body;
+             const currentUser = req.currentUser
+            //  console.log(currentUser._id)
              const newDataTable = {
                  topik : topik ,
                  nominal : nominal, 
                  tanggal : tanggal, 
                  foto  : foto, 
                  keterangan : keterangan,
-                 tipedata : tipedata
+                 tipedata : tipedata,
+                 userId: currentUser._id
              }
-
              console.log(newDataTable)
 
              const newData = await dataTableModel.create(newDataTable)
