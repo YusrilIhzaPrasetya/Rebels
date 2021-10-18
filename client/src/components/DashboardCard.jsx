@@ -1,11 +1,13 @@
 import React,{useState, useEffect} from 'react'
 import ModalUpdate from './ModalUpdate'
 import axios from '../axios'
+import ModalDetail from './ModalDetail'
 
 function DashboardCard({listen}) {
 
     const [data, setData] = useState([])
     const [openModal, setOpenModal] = useState(false)
+    const [openModalDetail, setOpenModalDetail] = useState(false)
     const item = localStorage.getItem("token")
 
     console.log(item)
@@ -23,21 +25,25 @@ function DashboardCard({listen}) {
             return(
                 <div className="pt-3 flex mx-32" key={elemement._id}>
                     <div className="flex flex-row mr-8 justify-between w-screen py-3 px-8 rounded-lg bg-gray-400 cursor-pointer" onClick={()=>{
-                        setOpenModal(true)
+                        setOpenModalDetail(true)
                     }}>
 
-                        <p>{elemement.tipedata}</p>
                         <p>{elemement.tanggal}</p>
+                        <p>{elemement.tipedata}</p>
                         <p>{elemement.nominal}</p>
 
-                    {openModal && <ModalUpdate closeModal={setOpenModal} />}
+                        
 
                     </div>
+                    {openModalDetail && <ModalDetail closeModal={setOpenModalDetail} />}
+
+                    <div>
                     <button onClick={()=>{
-                    setOpenModal(true)
-                    localStorage.setItem("_id",elemement._id)
-                }} className="border-transparent bg-green-500 text-white text-sm py-3 px-5 rounded-lg">=</button>
-                {openModal && <ModalUpdate closeModal={setOpenModal} />}
+                        setOpenModal(true)
+                        localStorage.setItem("_id",elemement._id)
+                        }} className="border-transparent bg-green-500 text-white text-sm py-3 px-5 rounded-lg">=</button>
+                        {openModal && <ModalUpdate closeModal={setOpenModal} />}
+                    </div>
                 </div>
             )
         })}
