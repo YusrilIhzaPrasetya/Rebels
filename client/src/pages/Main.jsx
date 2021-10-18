@@ -39,10 +39,10 @@ function Main() {
                 <div><p>Logo</p></div>
                 <div>
                     <button className="border-transparent text-md font-semibold mx-6">Bantuan</button>
-                    <button className="border-transparent bg-green-500 text-white text-sm p-3 rounded-lg" onClick={()=>{
+                    <button className="border-transparent bg-red-400 text-white text-sm p-3 rounded-lg" onClick={()=>{
                       setOpenModal(true)
                     }}>Tambah Aktifitas</button>
-                      <button onClick={logout}className="border-transparent bg-green-500 text-white w-28 text-sm ml-3 p-3 rounded-lg">Logout</button>
+                      <button onClick={logout}className="border-transparent bg-red-400 text-white w-28 text-sm ml-3 p-3 rounded-lg">Logout</button>
                     {openModal && <ModalCreate closeModal={setOpenModal} listen={listen} setListen={setListen} />}
                 </div>
             </div>
