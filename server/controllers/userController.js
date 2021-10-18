@@ -24,38 +24,38 @@ class userController {
         }
     }
     
-    static login = async(req,res,next)=>{
-        try {
-            const {email,password} = req.body;
-            const user = await userModel.findOne({
-                email : email
-            })
+    // static login = async(req,res,next)=>{
+    //     try {
+    //         const {email,password} = req.body;
+    //         const user = await userModel.findOne({
+    //             email : email
+    //         })
             
-            if(!user){
-               return next(error);
-            }
+    //         if(!user){
+    //            return next(error);
+    //         }
 
-            if(!bcrypt.compareSync(password,user.password)){
-                res.status(404).json({
-                    msg : "Email atau password salah"
-                })
-            }
+    //         if(!bcrypt.compareSync(password,user.password)){
+    //             res.status(404).json({
+    //                 msg : "Email atau password salah"
+    //             })
+    //         }
 
-            const accessToken = JWT.sign({
-                id : user._id,
-                nama : user.nama,
-                email : user.email
-            },process.env.JWT_SECRET)
+    //         const accessToken = JWT.sign({
+    //             id : user._id,
+    //             nama : user.nama,
+    //             email : user.email
+    //         },process.env.JWT_SECRET)
 
-            res.status(200).json({
-                msg:"email ada",
-                token : accessToken
-            })
+    //         res.status(200).json({
+    //             msg:"email ada",
+    //             token : accessToken
+    //         })
 
-        } catch (error) {
-            next(error)
-        }
-    }
+    //     } catch (error) {
+    //         next(error)
+    //     }
+    // }
 
         static login = async(req,res,next)=>{
         try {
@@ -65,13 +65,16 @@ class userController {
             })
             
             if(!user){
-               return next(error);
+               return next({code : 404, msg :"Not Found"});
+            }
+
+            if(!bcrypt.compareSync(password,user.password)){
+                return next({code : 422, msg :"Invalid Email Password"})
             }
 
             if(!bcrypt.compareSync(password,user.password)){
                 return next(error)
             }
-
             const accessToken = JWT.sign({
                 id : user._id,
                 nama : user.nama,
@@ -84,7 +87,24 @@ class userController {
             })
 
         } catch (error) {
-            next(error)
+            next({
+                code : 500,
+                msg: error.message
+            })
+        }
+    }
+
+    static logout = async(req,res,next)=>{
+        try {
+            res.clearCookie("jwt")
+            res.status(200).json({
+                msg:"Logout Success"
+            })
+        } catch (error) {
+            next({
+                code : 500,
+                msg: error.message
+            })
         }
     }
 }

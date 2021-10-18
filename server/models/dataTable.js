@@ -3,28 +3,31 @@ const mongoose = require("mongoose")
 const dataTableSchema = mongoose.Schema({
     topik : {
         type : String,
-        require : true
+        required : true
     },
     nominal : {
-        type : String,
-        require : true
+        type : Number,
+        required : true
     },
     tanggal : {
-        type : String,
-        require : true
+        type : Date,
+        required : true
     },
     foto : {
         type : String,
-        require : true
+        // required : true
     },
     keterangan : {
         type : String,
-        require : true
+        required : true
     },
     tipedata : {
         type : String,
-        require : true
-    },
+        required : true
+    },userId: {
+        type : String,
+        require: true
+    }
 },{
     versionKey: false ,
     collection:"dataTable"

@@ -1,28 +1,59 @@
 import React from 'react'
+import {useHistory} from "react-router-dom"
+import axios from "../axios"
+import {BrowserRouter as Link} from "react-router-dom"; 
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
 
-    const loginUser =(event)=>{
+    let history = useHistory()
+    const logAs = useSelector(state => state.logAs)
+    const dispatch = useDispatch()
+
+    const loginUser = async (event)=>{
+        
         event.preventDefault()
         let email = event.target.email.value;
         let password = event.target.password.value;
 
-        const result =  fetch(`http://localhost:4000/users/login`,{
-            method: `POST`, 
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        } ).then((res) => res.json())
-        console.log(result)
+        let data = {
+            email : email,
+            password : password
+        }
+
+        const login = await axios({
+            method : "POST",
+            url : "users/login",
+            data : data
+        })
+
+        // console.log(login)
+        history.push("/main")
+        localStorage.setItem("token",login.data.token)
+
+        console.log(localStorage)
+        await dispatch({
+            type : "Authing",
+            payload : { 
+                authAS : login.data.data
+            }
+        })
+        localStorage.setItem('authAs' , login.data.data)
+        // console.log(login.data.data)
+
+        await dispatch({
+            type:" Login",
+            payload : {
+                logAs : login.data.data
+            }
+        })
+       
     }
 
 
     return (
-        <div className="flex justify-center items-center fixed w-screen h-screen">
+        <div className="flex flex-col justify-center  items-center fixed w-screen h-screen">
+            <div>
             <form action="loginUser" onSubmit={loginUser} className="flex flex-col items-center">
                 <input type="email" placeholder="Masukan Email . . ." name="email" className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
                 <input type="password" name="password" placeholder="Masukan Password . . ." className="bg-black bg-opacity-10 border-none w-80 drop-shadow-xl p-2 rounded-lg my-2"/>
@@ -30,6 +61,13 @@ function Login() {
                     Masuk
                 </button>
             </form>
+            </div>
+            <div className='pt-5'>
+            <Link to="/register">
+            <button className="border-transparent bg-green-500 text-white w-28 text-sm p-3 rounded-lg">Registrasi</button>
+            </Link>
+            </div>
+            
         </div>
     )
 }
