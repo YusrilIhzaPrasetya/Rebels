@@ -6,11 +6,20 @@ import ModalDetail from './ModalDetail'
 function DashboardCard({listen}) {
 
     const [data, setData] = useState([])
+    const [selectedData, setSelectedData] = useState(null)
     const [openModal, setOpenModal] = useState(false)
     const [openModalDetail, setOpenModalDetail] = useState(false)
     const item = localStorage.getItem("token")
 
     console.log(item)
+
+    const detailData = (id) => {
+        data.map((xample)=>{
+            if(xample._id===id){
+                setSelectedData(xample)
+            }
+        })
+    }
     
     useEffect(()=>{
         axios.get("http://localhost:4000/datatable",{headers : {
@@ -26,6 +35,7 @@ function DashboardCard({listen}) {
                 <div className="pt-3 flex mx-32" key={elemement._id}>
                     <div className="flex flex-row mr-8 justify-between w-screen py-3 px-8 rounded-lg bg-gray-400 cursor-pointer" onClick={()=>{
                         setOpenModalDetail(true)
+                        detailData(elemement._id)
                     }}>
 
                         <p>{elemement.tanggal}</p>
@@ -35,7 +45,10 @@ function DashboardCard({listen}) {
                         
 
                     </div>
-                    {openModalDetail && <ModalDetail closeModal={setOpenModalDetail} />}
+                    {openModalDetail && <ModalDetail 
+                        closeModal={setOpenModalDetail}
+                        selectedData={selectedData}
+                    />}
 
                     <div>
                     <button onClick={()=>{

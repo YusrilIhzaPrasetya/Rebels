@@ -1,7 +1,20 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import imageDefault from "../assets/imageDefault.png"
+import axios from 'axios'
 
-function modalDetail({closeModal}) {
+function ModalDetail({closeModal,selectedData}) {
+
+    const [modalDetail, setModalDetail] = useState(null)
+    const token = useSelector(state=>state.auth.token)
+
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/datatable/${selectedData._id}`,{headers : {
+            token : token
+        }}).then(res=>console.log(res))
+    },[])
+
     return (
         <div className="fixed w-screen h-screen bg-black top-0 left-0 flex justify-center items-center bg-opacity-40">
             <div className="fixed p-6 w-1/3 bg-white drop-shadow-xl rounded-xl">
@@ -26,4 +39,4 @@ function modalDetail({closeModal}) {
     )
 }
 
-export default modalDetail
+export default ModalDetail
