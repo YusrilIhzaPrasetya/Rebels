@@ -5,8 +5,10 @@ import {useSelector} from "react-redux"
 function PrivateRouting(props) {
 
     const state = useSelector(state => state.auth)
+    let dataLogin = localStorage.getItem("dataLogin")
+    dataLogin = JSON.parse(dataLogin)
 
-    if (state.token){
+    if (dataLogin && dataLogin.token){
         return <Route {...props}>{
             props.childern
         }</Route>
