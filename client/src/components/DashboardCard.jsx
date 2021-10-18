@@ -33,6 +33,7 @@ console.log(item)
                     </div>
                     <button onClick={()=>{
                     setOpenModal(true)
+                    localStorage.setItem("_id",elemement._id)
                 }} className="border-transparent bg-green-500 text-white text-sm py-3 px-5 rounded-lg">=</button>
                 {openModal && <ModalUpdate closeModal={setOpenModal} />}
                 </div>
