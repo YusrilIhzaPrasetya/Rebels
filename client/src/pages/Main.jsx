@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import DashboardCard from '../components/DashboardCard'
 import ModalCreate from '../components/ModalCreate'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,12 +13,25 @@ function Main() {
     const logAs = useSelector(state => state.logAs)
     const isLogin = useSelector(state => state.isLogin)
 
+    const history = useHistory()
+
     const logout = (e) => {
-        e.preventDefault()
-        localStorage.removeItem("token");
-        localStorage.removeItem("authAs");
-        console.log("ini jalan")
+
+        localStorage.removeItem('authAs')
+
+        dispatch({
+            type:"AUTH_LOGOUT"
+        })
+
+        history.push("/")
+
+        // e.preventDefault()
+        // localStorage.removeItem("token");
+        // localStorage.removeItem("authAs");
+        // console.log("ini jalan")
+        // history.push("/login")
       }
+
       
     return (
         <div className="min-h-screen">
@@ -29,7 +42,7 @@ function Main() {
                     <button className="border-transparent bg-green-500 text-white text-sm p-3 rounded-lg" onClick={()=>{
                       setOpenModal(true)
                     }}>Tambah Aktifitas</button>
-                      <button onclick={logout}className="border-transparent bg-green-500 text-white w-28 text-sm ml-3 p-3 rounded-lg">Logout</button>
+                      <button onClick={logout}className="border-transparent bg-green-500 text-white w-28 text-sm ml-3 p-3 rounded-lg">Logout</button>
                     {openModal && <ModalCreate closeModal={setOpenModal} listen={listen} setListen={setListen} />}
                 </div>
             </div>

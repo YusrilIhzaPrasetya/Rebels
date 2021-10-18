@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import "./style.css"
 import Main from "./pages/Main";
 import PublicRouting from "./utils/PublicRouting";
+import PrivateRouting from "./utils/PrivateRouting";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <PublicRouting path="/" exact component={Home}/>
           <PublicRouting path="/login" exact component={Login}/>
           <PublicRouting path="/register" exact component={Register}/>
-          <Route path="/main" exact component={Main}/>
+          <PrivateRouting path="/main" exact component={Main}/>
         </Switch>
       </Router>
     </div>

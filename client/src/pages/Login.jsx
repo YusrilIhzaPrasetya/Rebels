@@ -27,27 +27,19 @@ function Login() {
             data : data
         })
 
-        // console.log(login)
-        history.push("/main")
-        localStorage.setItem("token",login.data.token)
-
         console.log(localStorage)
-        await dispatch({
-            type : "Authing",
-            payload : { 
-                authAS : login.data.data
-            }
-        })
         localStorage.setItem('authAs' , login.data.data)
-        // console.log(login.data.data)
-
-        await dispatch({
-            type:" Login",
-            payload : {
-                logAs : login.data.data
-            }
-        })
-       
+        if(login.status==200){
+            dispatch({
+                type:"AUTH_LOGIN",
+                payload : {
+                    token : login.data.token,
+                    user : login.data.user
+                }
+            })
+            history.replace("/main")
+            localStorage.setItem("token",login.data.token)
+        }  
     }
 
 

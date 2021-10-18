@@ -83,7 +83,8 @@ class userController {
 
             res.status(200).json({
                 msg:"email ada",
-                token : accessToken
+                token : accessToken,
+                user : user
             })
 
         } catch (error) {
