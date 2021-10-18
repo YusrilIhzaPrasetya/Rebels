@@ -1,8 +1,8 @@
 import React from 'react'
+import {Link} from "react-router-dom"; 
 import {useHistory} from "react-router-dom"
 import axios from "../axios"
-import {BrowserRouter as Link} from "react-router-dom"; 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 
 function Login() {
 
@@ -27,27 +27,19 @@ function Login() {
             data : data
         })
 
-        // console.log(login)
-        history.push("/main")
-        localStorage.setItem("token",login.data.token)
-
         console.log(localStorage)
-        await dispatch({
-            type : "Authing",
-            payload : { 
-                authAS : login.data.data
-            }
-        })
         localStorage.setItem('authAs' , login.data.data)
-        // console.log(login.data.data)
-
-        await dispatch({
-            type:" Login",
-            payload : {
-                logAs : login.data.data
-            }
-        })
-       
+        if(login.status==200){
+            dispatch({
+                type:"AUTH_LOGIN",
+                payload : {
+                    token : login.data.token,
+                    user : login.data.user
+                }
+            })
+            history.replace("/main")
+            localStorage.setItem("token",login.data.token)
+        }  
     }
 
 
@@ -63,9 +55,7 @@ function Login() {
             </form>
             </div>
             <div className='pt-5'>
-            <Link to="/register">
-            <button className="border-transparent bg-green-500 text-white w-28 text-sm p-3 rounded-lg">Registrasi</button>
-            </Link>
+            <Link to="/register"><button className="text-sm mt-3 h-2">Belum punya akun?</button></Link>
             </div>
             
         </div>

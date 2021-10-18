@@ -7,7 +7,9 @@ function DashboardCard({listen}) {
     const [data, setData] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const item = localStorage.getItem("token")
-console.log(item)
+
+    console.log(item)
+    
     useEffect(()=>{
         axios.get("http://localhost:4000/datatable",{headers : {
             token : item
