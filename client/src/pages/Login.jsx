@@ -1,8 +1,8 @@
 import React from 'react'
+import {Link} from "react-router-dom"; 
 import {useHistory} from "react-router-dom"
 import axios from "../axios"
-import {BrowserRouter as Link} from "react-router-dom"; 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 
 function Login() {
 
@@ -63,9 +63,7 @@ function Login() {
             </form>
             </div>
             <div className='pt-5'>
-            <Link to="/register">
-            <button className="border-transparent bg-green-500 text-white w-28 text-sm p-3 rounded-lg">Registrasi</button>
-            </Link>
+            <Link to="/register"><button className="text-sm mt-3 h-2">Belum punya akun?</button></Link>
             </div>
             
         </div>
