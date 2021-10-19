@@ -40,8 +40,8 @@ class Users {
     static async updateUser(req, res, next) {
       const { _id } = req.params;
       const { nama } = req.body;
-      const users = await users.findOne(_id);
-      if (!users) {
+      const user = await users.findOne(_id);
+      if (!user) {
         next({
           code: 404,
           message: "user not found"
@@ -52,24 +52,21 @@ class Users {
           message: "please fill nama"
         });
       } else {
-        users.nama = nama || users.nama;
-        users.save();
+        user.nama = nama || user.nama;
+        user.save();
   
         res.status(200).json({
           message: "success update nama",
-          users
+          user
         });
       }
     }
-  
+    
     static destroyUser = async (req, res, next) => {
       let { _id } = req.params;
       try {
-        let user = await userModel.findOne({where:{
-          _id: _id
-        }});
-        await user.destroy();
-
+        let user = await users.findOne(_id);
+        users.remove();
         res.status(200).json({
           message: "deleted success"
         });
