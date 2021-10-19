@@ -69,8 +69,8 @@ function DashboardCard({listen}) {
                         setOpenModal(true)
                         localStorage.setItem("_id",elemement._id)
                         }} className="border-transparent bg-red-400 text-white text-sm py-3 px-5 rounded-lg">=</button>
-                        {openModal && <ModalUpdate closeModal={setOpenModal} />}
                         <button onClick={()=> {deleteData(elemement._id) }} >&times;</button>
+                        {openModal && <ModalUpdate closeModal={setOpenModal} />}
                     </div>
                 </div>
             )

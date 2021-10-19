@@ -5,7 +5,7 @@ const userRouter = require("./userRouter");
 const dataTableRouter = require("./dataTableRouter");
 
 router.use(userRouter);
-router.use(authentication);
+// router.use(authentication);
 // router.use(authorization);
 router.use(dataTableRouter);
 

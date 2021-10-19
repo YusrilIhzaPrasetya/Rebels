@@ -3,6 +3,7 @@ import DashboardCard from '../components/DashboardCard'
 import ModalCreate from '../components/ModalCreate'
 import { useDispatch, useSelector } from 'react-redux'
 import {Link, useHistory } from "react-router-dom";
+import AllDataCard from '../components/AllDataCard';
 
 function Main() {
 
@@ -48,6 +49,7 @@ function Main() {
                     {openModal && <ModalCreate closeModal={setOpenModal} listen={listen} setListen={setListen} />}
                 </div>
             </div>
+            <AllDataCard />
             <div>
                 <DashboardCard listen={listen} />
             </div>
