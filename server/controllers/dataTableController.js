@@ -17,12 +17,10 @@ const upload = multer({storage:storage})
      static getAll = async (req,res,next)=>{
          try {
             const currentUser = req.currentUser
-
-            // console.log(currentUser)
-            //  const datatable = await dataTableModel.findOne({userId: currentUser._id});
+            
              const datatable = await dataTableModel.find({userId: currentUser._id}).sort("-tanggal").transform((data)=>{
+                 
                 return data.map((item)=>{
-                     
                     return {
                         _id : item._id,
                         topik: item.topik,
@@ -30,13 +28,16 @@ const upload = multer({storage:storage})
                         tanggal: (item.tanggal)?item.tanggal.toLocaleDateString() : item.tanggal ,
                         foto: item.foto,
                         keterangan: item.keterangan,
-                        tipedata: item.tipedata
+                        tipedata: item.tipedata,
+                        
                     } 
+
                 })
              });
              res.status(200).json({
                  message : "success",
                  datatable,
+                 currentUser
              })
          } catch (error) {
              next(error)
@@ -45,9 +46,12 @@ const upload = multer({storage:storage})
 
      static createDataTable = async (req,res,next)=>{
          try {
-             const { topik,nominal,tanggal,foto,keterangan,tipedata} = req.body;
              const currentUser = req.currentUser
-            //  console.log(currentUser._id)
+
+             const { topik,nominal,tanggal,foto,keterangan,tipedata} = req.body;
+            console.log(currentUser._id)
+            
+            
              const newDataTable = {
                  topik : topik ,
                  nominal : nominal, 
@@ -57,9 +61,10 @@ const upload = multer({storage:storage})
                  tipedata : tipedata,
                  userId: currentUser._id
              }
-             console.log(newDataTable)
-
+    
+             
              const newData = await dataTableModel.create(newDataTable)
+             
              res.status(201).json({
                  message : "New Data has beed added",
                  newData
@@ -70,7 +75,8 @@ const upload = multer({storage:storage})
                  msg : error.message
              })
          }
-     }
+        }
+
      static getDetail = async (req,res,next)=>{
          try {
              const {dataTableId} = req.params

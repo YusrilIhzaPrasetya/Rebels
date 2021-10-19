@@ -5,6 +5,7 @@ function ModalCreate({closeModal, listen, setListen}) {
 
     const[tipe,setTipe]=useState(null)
 
+
     const tambahData =async(event)=>{
 
         event.preventDefault()
@@ -15,7 +16,7 @@ function ModalCreate({closeModal, listen, setListen}) {
         let keterangan = event.target.keterangan.value;
         let tipedata = tipe;
 
-        console.log(tanggal)
+
 
     const data = {
         topik : topik,
@@ -24,9 +25,10 @@ function ModalCreate({closeModal, listen, setListen}) {
         foto : foto,
         keterangan : keterangan,
         tipedata : tipedata,
+
     }
 
-    console.log(data)
+
     const item = localStorage.getItem("token")
 
     const result = await axios({
@@ -36,9 +38,8 @@ function ModalCreate({closeModal, listen, setListen}) {
         method : "POST",
         url : "http://localhost:4000/datatable",
         data : data
-    })
-    console.log(result)
-    // console.log(data)
+    }) 
+    
 
     setListen(listen+1)
     closeModal(false)
