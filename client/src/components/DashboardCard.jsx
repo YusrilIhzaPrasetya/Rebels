@@ -10,6 +10,8 @@ function DashboardCard({listen}) {
     const [openModal, setOpenModal] = useState(false)
     const [openModalDetail, setOpenModalDetail] = useState(false)
     const item = localStorage.getItem("token")
+    const [value , setValue] = useState(0)
+    const nominal = []
 
 
     const detailData = (id) => {
@@ -19,6 +21,16 @@ function DashboardCard({listen}) {
             }
         })
     }
+    
+    for(let i =0 ; i< data.length ; i++){
+        if(data[i].tipedata == "pemasukan"){
+            nominal.push(parseInt(data[i].nominal))
+        }else{
+            nominal.push(parseInt(-data[i].nominal))
+        }
+    }
+    var sum = nominal.reduce(function(a,b){return a+b; },0)
+   
     const deleteData = async (id) =>{
         // data.map((xample)=>{
         //     if(xample._id===id){
@@ -40,39 +52,48 @@ function DashboardCard({listen}) {
         }}).then(res=>setData(res.data.datatable))
     },[listen])
     
+    
+
 
     return (
 
     <div>
-        {data.map((elemement,index)=>{
+            <div className='pt-3 mx-32 flex flex-row justify-between'>
+                <p>Total Simpanan</p> 
+                <p>{sum}</p>
+            </div>
+        {data.map((elemement,index)=>{ 
             return(
+                
                 <div className="pt-3 flex mx-32" key={elemement._id}>
+                    
                     <div className="flex flex-row mr-8 justify-between w-screen py-3 px-8 rounded-lg bg-gray-400 cursor-pointer" onClick={()=>{
                         setOpenModalDetail(true)
                         detailData(elemement._id)
                     }}>
-
                         <p>{elemement.tanggal}</p>
                         <p>{elemement.tipedata}</p>
                         <p>{elemement.nominal}</p>
 
-                        
-
                     </div>
+
+                    
                     {openModalDetail && <ModalDetail 
                         closeModal={setOpenModalDetail}
                         selectedData={selectedData}
+                        
                     />}
 
-                    <div>
+                    <div className="flex flex-row ">
                     <button onClick={()=>{
-                        setOpenModal(true)
+                        setOpenModal(true) 
                         localStorage.setItem("_id",elemement._id)
-                        }} className="border-transparent bg-red-400 text-white text-sm py-3 px-5 rounded-lg">=</button>
-                        <button onClick={()=> {deleteData(elemement._id) }} >&times;</button>
-                        {openModal && <ModalUpdate closeModal={setOpenModal} />}
+                        }} className="border-transparent bg-green-500 text-white text-sm py-3 px-5 rounded-lg">=</button>
+                        {openModal && <ModalUpdate closeModal={setOpenModal}/>}
+                    <button  onClick={()=> {deleteData(elemement._id) }} className="border-transparent bg-red-400 text-white text-sm py-3 px-5 rounded-lg" >&times;</button>
                     </div>
                 </div>
+            
             )
         })}
     </div>   

@@ -21,18 +21,13 @@ function Main() {
     const logout = (e) => {
 
         localStorage.removeItem('authAs')
+        localStorage.removeItem('token')
 
         dispatch({
             type:"AUTH_LOGOUT"
         })
 
         history.push("/")
-
-        // e.preventDefault()
-        // localStorage.removeItem("token");
-        // localStorage.removeItem("authAs");
-        // console.log("ini jalan")
-        // history.push("/login")
       }
 
       
