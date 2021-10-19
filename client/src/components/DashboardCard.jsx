@@ -6,13 +6,18 @@ function DashboardCard({listen}) {
 
     const [data, setData] = useState([])
     const [openModal, setOpenModal] = useState(false)
-    const item = localStorage.getItem("token")
-console.log(item)
+    
+    // const item = localStorage.getItem("token")
+    const item = " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNjhlYTkwYWMwMjdmYzQxMWY3NWE3NiIsIm5hbWEiOiJhbGltIiwiZW1haWwiOiJhbGltQG1haWwuY29tIiwiaWF0IjoxNjM0NTIzMjQ1fQ.-c6u0wbL1I-z1_p_GwE-mPB41uBocjkP8TyMJwvtVHk"
+   
+    console.log(item)
     useEffect(()=>{
         axios.get("http://localhost:4000/datatable",{headers : {
             token : item
         }}).then(res=>setData(res.data.datatable))
     },[listen])
+    console.log(item)
+    
 
     return (
 
@@ -29,10 +34,10 @@ console.log(item)
                         <p>{elemement.nominal}</p>
 
                     {openModal && <ModalUpdate closeModal={setOpenModal} />}
-
                     </div>
                     <button onClick={()=>{
                     setOpenModal(true)
+                    
                 }} className="border-transparent bg-green-500 text-white text-sm py-3 px-5 rounded-lg">=</button>
                 {openModal && <ModalUpdate closeModal={setOpenModal} />}
                 </div>

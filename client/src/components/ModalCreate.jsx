@@ -42,16 +42,6 @@ function ModalCreate({closeModal, listen, setListen}) {
 
     setListen(listen+1)
     closeModal(false)
-
-        // const result =  fetch(`http://localhost:4000/datatable`,{
-        //     method: `POST`, 
-        //     headers: { 
-        //         'Content-Type': 'application/json',
-
-        //     },
-        //     body: JSON.stringify(data)
-        // } ).then((res) => res.json()).then(res=>console.log(res))
-        // // console.log(result)
     }
 
     return (

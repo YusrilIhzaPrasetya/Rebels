@@ -1,4 +1,5 @@
 const users = require("../models/user");
+const userModel = require('../models/user')
 
 class Users {
     static async readAll(req, res, next) {
@@ -64,8 +65,11 @@ class Users {
     static destroyUser = async (req, res, next) => {
       let { _id } = req.params;
       try {
-        let users = await users.findOne(_id);
-        users.destroy();
+        let user = await userModel.findOne({where:{
+          _id: _id
+        }});
+        await user.destroy();
+
         res.status(200).json({
           message: "deleted success"
         });
