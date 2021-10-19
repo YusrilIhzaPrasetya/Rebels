@@ -4,6 +4,9 @@ import React,{useState} from 'react'
 function ModalCreate({closeModal, listen, setListen}) {
 
     const[tipe,setTipe]=useState(null)
+    const[simpanGambar, setSimpanGambar]=useState([])
+
+    
 
     const tambahData =async(event)=>{
 
@@ -52,7 +55,7 @@ function ModalCreate({closeModal, listen, setListen}) {
                         closeModal(false)
                     }}>X</button>
                 </div>
-                <form onSubmit={tambahData} action="" className="flex flex-col">
+                <form onSubmit={tambahData} action="/uploadfile" enctype="multipart/form-data" method="POST" className="flex flex-col">
                     <input type="text" placeholder="Topic" name="topik" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg my-2"/>
                     <input type="text" placeholder="Nominal" name="nominal" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
                         <div>
@@ -60,7 +63,7 @@ function ModalCreate({closeModal, listen, setListen}) {
                             <input type="file" name="foto" className="mb-4 mt-2"/>
                         </div>
                             <textarea placeholder="Keterangan" name="keterangan" className="bg-black bg-opacity-10 border-none drop-shadow-xl h-32 p-2 rounded-lg mb-2"></textarea>
-                            <p className="text-sm my-2 text-gray-500">Catat sebagai</p>
+                            <p className="text-sm my-2 text-gray-500" name = "myFile">Catat sebagai</p>
                     <div>
                         <button onClick={()=>setTipe("pemasukan")} className="py-2 px-6 mr-5 rounded-lg border-transparent bg-green-500 text-white">Pemasukan</button>
                         <button onClick={()=>setTipe("pengeluaran")} className="py-2 px-6 rounded-lg border-transparent bg-red-500 text-white">Pengeluaran</button>
