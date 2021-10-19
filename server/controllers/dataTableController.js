@@ -17,11 +17,12 @@ const upload = multer({storage:storage})
      static getAll = async (req,res,next)=>{
          try {
             const currentUser = req.currentUser
+
             // console.log(currentUser)
             //  const datatable = await dataTableModel.findOne({userId: currentUser._id});
              const datatable = await dataTableModel.find({userId: currentUser._id}).sort("-tanggal").transform((data)=>{
-                // console.log(data) 
                 return data.map((item)=>{
+                     
                     return {
                         _id : item._id,
                         topik: item.topik,
