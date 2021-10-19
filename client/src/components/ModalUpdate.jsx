@@ -62,8 +62,8 @@ function ModalUpdate({closeModal, listen, setListen}) {
                         <textarea placeholder="Keterangan" name="keterangan" className="bg-black bg-opacity-10 border-none drop-shadow-xl h-32 p-2 rounded-lg mb-2"></textarea>
                         <p className="text-sm my-2 text-gray-500">Catat sebagai</p>
                 <div>
-                    <button onClick={()=>setTipe("updated")} className="py-2 px-6 mr-5 rounded-lg border-transparent bg-green-500 text-white">Update</button>
-                    <button onClick={()=>setTipe("deleted")} className="py-2 px-6 rounded-lg border-transparent bg-red-500 text-white">Delete</button>
+                    <button onClick={()=>setTipe("pemasukan")} className="py-2 px-6 mr-5 rounded-lg border-transparent bg-green-500 text-white">Update</button>
+                    <button onClick={()=>setTipe("pengeluaran")} className="py-2 px-6 rounded-lg border-transparent bg-red-500 text-white">Delete</button>
                     </div>
                 </form>
             </div>

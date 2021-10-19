@@ -6,6 +6,8 @@ import {Link, useHistory } from "react-router-dom";
 
 function Main() {
 
+    const history = useHistory()
+
     const [listen, setListen] = useState(0)
     const [openModal, setOpenModal] = useState(false)
     const dispatch = useDispatch()
@@ -13,7 +15,7 @@ function Main() {
     const logAs = useSelector(state => state.logAs)
     const isLogin = useSelector(state => state.isLogin)
 
-    const history = useHistory()
+
 
     const logout = (e) => {
 

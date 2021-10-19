@@ -11,7 +11,6 @@ function DashboardCard({listen}) {
     const [openModalDetail, setOpenModalDetail] = useState(false)
     const item = localStorage.getItem("token")
 
-    console.log(item)
 
     const detailData = (id) => {
         data.map((xample)=>{
@@ -20,12 +19,27 @@ function DashboardCard({listen}) {
             }
         })
     }
+    const deleteData = async (id) =>{
+        // data.map((xample)=>{
+        //     if(xample._id===id){
+        //         setSelectedData(xample)
+        //     }
+        // })
+        const result = await axios({
+            headers : {
+                token : item
+            },
+            method : "DELETE",
+            url : `http://localhost:4000/datatable/${id}`,
+        })
+    }
     
     useEffect(()=>{
         axios.get("http://localhost:4000/datatable",{headers : {
             token : item
         }}).then(res=>setData(res.data.datatable))
     },[listen])
+    
 
     return (
 
@@ -56,6 +70,7 @@ function DashboardCard({listen}) {
                         localStorage.setItem("_id",elemement._id)
                         }} className="border-transparent bg-red-400 text-white text-sm py-3 px-5 rounded-lg">=</button>
                         {openModal && <ModalUpdate closeModal={setOpenModal} />}
+                        <button onClick={()=> {deleteData(elemement._id) }} >&times;</button>
                     </div>
                 </div>
             )

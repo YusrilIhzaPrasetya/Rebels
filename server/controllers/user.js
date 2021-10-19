@@ -1,4 +1,5 @@
 const users = require("../models/user");
+const userModel = require('../models/user')
 
 class Users {
     static async readAll(req, res, next) {
