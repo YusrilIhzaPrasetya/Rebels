@@ -36,7 +36,9 @@ function DashboardCard({listen}) {
     var sum = nominal.reduce(function(a,b){return a+b; },0)
    
     const deleteData = async (id) =>{
-        const result =  axios({
+
+        const result = await axios({
+
             headers : {
                 token : item
             },
