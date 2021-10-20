@@ -35,6 +35,9 @@ function Main() {
             <div className="flex content-between justify-between mx-32 mt-7 mb-16">
                 <div><p>Logo</p></div>
                 <div>
+                    <Link className="link" to="/Crypto">
+                    <button className="border-transparent text-md font-semibold mx-6">Crypto</button>
+                    </Link>
                     <button className="border-transparent text-md font-semibold mx-6">Bantuan</button>
                     <button className="border-transparent bg-red-400 text-white text-sm p-3 rounded-lg" onClick={()=>{
                       setOpenModal(true)

@@ -20,15 +20,14 @@ function Login() {
             email : email,
             password : password
         }
-
         const login = await axios({
             method : "POST",
             url : "users/login",
             data : data
         })
+        
+        localStorage.setItem("token",login.data.token)
 
-        console.log(localStorage)
-        localStorage.setItem('authAs' , login.data.data)
         if(login.status==200){
             dispatch({
                 type:"AUTH_LOGIN",
@@ -37,8 +36,8 @@ function Login() {
                     user : login.data.user
                 }
             })
+            
             history.replace("/main")
-            localStorage.setItem("token",login.data.token)
         }  
     }
 

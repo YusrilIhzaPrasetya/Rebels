@@ -10,9 +10,13 @@ function DashboardCard({listen}) {
     const [openModal, setOpenModal] = useState(false)
     const [openModalDetail, setOpenModalDetail] = useState(false)
     const item = localStorage.getItem("token")
-    const [value , setValue] = useState(0)
     const nominal = []
-
+    
+    useEffect(()=>{
+        axios.get("http://localhost:4000/datatable",{headers : {
+            token : item
+        }}).then(res=>setData(res.data.datatable))
+    },[listen])
 
     const detailData = (id) => {
         data.map((xample)=>{
@@ -21,7 +25,7 @@ function DashboardCard({listen}) {
             }
         })
     }
-    
+
     for(let i =0 ; i< data.length ; i++){
         if(data[i].tipedata == "pemasukan"){
             nominal.push(parseInt(data[i].nominal))
@@ -32,27 +36,17 @@ function DashboardCard({listen}) {
     var sum = nominal.reduce(function(a,b){return a+b; },0)
    
     const deleteData = async (id) =>{
-        // data.map((xample)=>{
-        //     if(xample._id===id){
-        //         setSelectedData(xample)
-        //     }
-        // })
+
         const result = await axios({
+
             headers : {
                 token : item
             },
             method : "DELETE",
             url : `http://localhost:4000/datatable/${id}`,
         })
+        window.location.reload()
     }
-    
-    useEffect(()=>{
-        axios.get("http://localhost:4000/datatable",{headers : {
-            token : item
-        }}).then(res=>setData(res.data.datatable))
-    },[listen])
-    
-    
 
 
     return (
