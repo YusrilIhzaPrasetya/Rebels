@@ -36,13 +36,14 @@ function DashboardCard({listen}) {
     var sum = nominal.reduce(function(a,b){return a+b; },0)
    
     const deleteData = async (id) =>{
-        const result = await axios({
+        const result =  axios({
             headers : {
                 token : item
             },
             method : "DELETE",
             url : `http://localhost:4000/datatable/${id}`,
         })
+        window.location.reload()
     }
 
 
