@@ -11,7 +11,7 @@ const authentication = async (req,res,next) => {
     const jwtPayload = jwt.verify(token, process.env.JWT_SECRET);
     
     const user = await users.findOne({ _id: jwtPayload.id})
-    console.log(user)
+
     if (!users) {
     next({ code: 401, message: "invalid access token!" });
     }
