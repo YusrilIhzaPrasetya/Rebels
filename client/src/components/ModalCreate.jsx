@@ -6,6 +6,7 @@ function ModalCreate({closeModal, listen, setListen}) {
     const[tipe,setTipe]=useState(null)
 
 
+
     const tambahData =async(event)=>{
         event.preventDefault()
         let topik = event.target.topik.value;
@@ -24,6 +25,7 @@ function ModalCreate({closeModal, listen, setListen}) {
         foto : foto,
         keterangan : keterangan,
         tipedata : tipedata,
+
     }
 
 
