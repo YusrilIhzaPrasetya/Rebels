@@ -25,7 +25,7 @@ const dataTableSchema = mongoose.Schema({
         type : String,
         required : true
     },userId: {
-        type : String,
+        type : mongoose.Schema.Types.ObjectId,
         require: true
     }
 },{

@@ -5,9 +5,63 @@ function ModalCreate({closeModal, listen, setListen}) {
 
     const[tipe,setTipe]=useState(null)
     const[simpanGambar, setSimpanGambar]=useState([])
+    const[data, setData]=useState({topik : "", nominal : null, keterangan : "", tanggal : "", tipedata : null})
+    const[image, setImage] = useState("")
 
+    const token = localStorage.getItem("token")
+
+    const nonFileChange = (e) => {
+        let uploaded = e.target.files[0]
+        setSimpanGambar(uploaded)
+        console.log(simpanGambar)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(data)
+        if(!simpanGambar){
+            alert("UPLOAD GAMBAR DULU")
+        }else{
+            let formData = new FormData();
+            formData.append("myFile", simpanGambar);
+            console.log("ini Imputan gambaran",simpanGambar)
+            formData.append("topik", data.topik.value);
+            formData.append("nominal", data.nominal.value);
+            formData.append("tanggal", data.tanggal.value);
+            formData.append("keterangan", data.keterangan.value);
+            formData.append("tipedata", tipe);
+            try {
+                const pictureUpload = async () => {
+                  console.log("data image", formData);
+                  await axios
+                    .post("/uploadfile", formData, {
+                      headers: {
+                        "Content-Type": "multipart/form-data",
+                        token: token,
+                      },
+                    })
+                    .then((res) => {
+                      console.log("ini Response", res);
+                      const gambar = res.data.file;
+                      localStorage.setItem("img", JSON.stringify(gambar));
+                      setSimpanGambar(null);
+                      setImage(gambar);
+                    });
+                };
+                pictureUpload();
+              } catch (error) {
+                console.log(error);
+              }
+        }
+    }
+
+    const onChange = (e) => {
+        setData({
+          ...data,
+          [e.target.name]: e.target.value,
+        });
+      };
     
-
     const tambahData =async(event)=>{
 
         event.preventDefault()
@@ -56,13 +110,13 @@ function ModalCreate({closeModal, listen, setListen}) {
                     }}>X</button>
                 </div>
                 <form onSubmit={tambahData} action="/uploadfile" enctype="multipart/form-data" method="POST" className="flex flex-col">
-                    <input type="text" placeholder="Topic" name="topik" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg my-2"/>
-                    <input type="text" placeholder="Nominal" name="nominal" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
+                    <input type="text" onChange={onChange} placeholder="Topic" name="topik" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg my-2"/>
+                    <input type="text" onChange={onChange} placeholder="Nominal" name="nominal" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
                         <div>
-                            <input type="date" name="tanggal" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
-                            <input type="file" name="foto" className="mb-4 mt-2"/>
+                            <input type="date" onChange={onChange} name="tanggal" className="bg-black bg-opacity-10 border-none drop-shadow-xl p-2 rounded-lg mb-2"/>
+                            <input type="file" accept="image/*" onChange={nonFileChange} name="foto" className="mb-4 mt-2"/>
                         </div>
-                            <textarea placeholder="Keterangan" name="keterangan" className="bg-black bg-opacity-10 border-none drop-shadow-xl h-32 p-2 rounded-lg mb-2"></textarea>
+                            <textarea placeholder="Keterangan" onChange={onChange} name="keterangan" className="bg-black bg-opacity-10 border-none drop-shadow-xl h-32 p-2 rounded-lg mb-2"></textarea>
                             <p className="text-sm my-2 text-gray-500" name = "myFile">Catat sebagai</p>
                     <div>
                         <button onClick={()=>setTipe("pemasukan")} className="py-2 px-6 mr-5 rounded-lg border-transparent bg-green-500 text-white">Pemasukan</button>
