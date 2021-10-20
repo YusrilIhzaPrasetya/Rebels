@@ -6,6 +6,7 @@ import "./style.css"
 import Main from "./pages/Main";
 import PublicRouting from "./utils/PublicRouting";
 import PrivateRouting from "./utils/PrivateRouting";
+import Crypto from "./pages/Crypto-currency";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <PublicRouting path="/" exact component={Home}/>
           <PublicRouting path="/login" exact component={Login}/>
           <PublicRouting path="/register" exact component={Register}/>
+          <PrivateRouting path="/crypto" exact component={Crypto}/>
           <PrivateRouting path="/main" exact component={Main}/>
         </Switch>
       </Router>

@@ -8,7 +8,7 @@ function ModalCreate({closeModal, listen, setListen}) {
 
 
     const tambahData =async(event)=>{
-
+        event.preventDefault()
         let topik = event.target.topik.value;
         let nominal = event.target.nominal.value;
         let tanggal = event.target.tanggal.value;
